@@ -3,7 +3,7 @@
 '''
 
 
-def index_range(page: int, page_size: int) -> tuple:
+def index_range(page, page_size):
     '''
     A function that that take two int and returns
     a tuple
