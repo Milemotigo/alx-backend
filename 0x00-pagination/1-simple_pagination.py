@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''a function named index_range that takes two integer arguments page and page_size
+'''Implement a method named get_page that takes two integer arguments page
 '''
 import csv
 import math

@@ -12,5 +12,3 @@ def index_range(page, page_size):
     end = start + page_size
 
     return(start, end)
-
-print(index_range(1, 10))
