@@ -37,25 +37,26 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
+        """
+        return the appropriate pages of the dataset
+        """
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
+
         start, end = index_range(page, page_size)
-        if start >= len(self.dataset()) or end < 0:
-            return []
-        else:
-            return self.dataset()[start:end]
+        return self.dataset()[start:end]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
-        dataset_page = self.get_page(page, page_size)
+        data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
 
         next_page = page + 1 if page < total_pages else None
         prev_page = page - 1 if page > 1 else None
 
         return {
-            "page_size": len(dataset_page),
+            "page_size": len(data),
             "page": page,
-            "data": dataset_page,
+            "data": data,
             "next_page": next_page,
             "prev_page": prev_page,
             "total_pages": total_pages
