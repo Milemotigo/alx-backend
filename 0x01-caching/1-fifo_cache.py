@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
- a class FIFOCache that inherits from BaseCaching and is a caching system
+a class FIFOCache that inherits from BaseCaching and is a caching system
 '''
 
 
@@ -8,11 +8,11 @@ from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    """ 
+    """
     a class FIFOCache that inherits from BaseCaching
     """
     def __init__(self):
-       super().__init__()
+        super().__init__()
 
     def put(self, key, item):
         """

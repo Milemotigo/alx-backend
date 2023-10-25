@@ -9,6 +9,7 @@ class LIFOCache(BaseCaching):
     def __init__(self):
         super().__init__()
     
+
     def put(self, key, item):
         if key is None or item is None:
             return
@@ -22,4 +23,3 @@ class LIFOCache(BaseCaching):
     def get(self, key):
         if key is None:
             return self.cache_data.get(key, None)
-        
