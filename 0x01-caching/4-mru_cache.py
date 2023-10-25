@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-""" LRU Caching
+""" MRU Caching
 """
 
 from base_caching import BaseCaching
 from collections import OrderedDict
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """
-    a class LRUCache that inherits from
+    a class MRUCache that inherits from
     BaseCaching and is a caching system
     """
 
@@ -24,15 +24,15 @@ class LRUCache(BaseCaching):
         if key is None or item is None:
             return
         if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            lru_item = next(iter(self.cache_data))
-            print(f"DISCARD: {lru_item}")
-            del self.cache_data[lru_item]
+            mru_item = next(reversed(self.cache_data))
+            print(f"DISCARD: {mru_item}")
+            del self.cache_data[mru_item]
         self.cache_data[key] = item
         self.cache_data.move_to_end(key, last=True)
 
     def get(self, key):
         """
-        get the least recent used key
+        get the most recent used key
         """
         if key is None:
             return None
