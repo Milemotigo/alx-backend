@@ -3,6 +3,7 @@
 """
 
 from base_caching import BaseCaching
+from collections import OrderedDict
 
 
 class LRUCache(BaseCaching):
@@ -13,6 +14,7 @@ class LRUCache(BaseCaching):
 
     def __init__(self):
         super().__init__()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """
@@ -26,6 +28,7 @@ class LRUCache(BaseCaching):
             print(f"DISCARD: {lru_item}")
             del self.cache_data[lru_item]
         self.cache_data[key] = item
+        self.cache_data.move_to_end(key, last=True)
 
     def get(self, key):
         """
