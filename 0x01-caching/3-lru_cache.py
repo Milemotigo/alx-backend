@@ -7,8 +7,8 @@ from base_caching import BaseCaching
 
 class LRUCache(BaseCaching):
     """
-     a class LRUCache that inherits from
-     BaseCaching and is a caching system
+    a class LRUCache that inherits from
+    BaseCaching and is a caching system
     """
 
     def __init__(self):
@@ -26,7 +26,6 @@ class LRUCache(BaseCaching):
             print(f"DISCARD: {lru_item}")
             del self.cache_data[lru_item]
         self.cache_data[key] = item
-        lru_item = +1
 
     def get(self, key):
         """
