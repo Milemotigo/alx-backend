@@ -4,13 +4,20 @@
 
 from base_caching import BaseCaching
 
+
 class LIFOCache(BaseCaching):
+    """
+    a class LIFOCache that inherits from BaseCaching
+    """
 
     def __init__(self):
         super().__init__()
-    
 
     def put(self, key, item):
+        """
+        You must use self.cache_data - dictionary
+        from the parent class BaseCaching
+        """
         if key is None or item is None:
             return
         if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
@@ -21,5 +28,8 @@ class LIFOCache(BaseCaching):
         self.cache_data[key] = item
 
     def get(self, key):
+        """
+        Must return the value in self.cache_data linked to key
+        """
         if key is None:
             return self.cache_data.get(key, None)
