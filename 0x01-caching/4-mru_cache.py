@@ -12,7 +12,6 @@ class MRUCache(BaseCaching):
     """
     def __init__(self):
         super().__init__()
-        # Initialize an empty ordered dictionary
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
