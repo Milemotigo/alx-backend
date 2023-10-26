@@ -11,7 +11,11 @@ class MRUCache(BaseCaching):
     and is a caching system
     """
     def __init__(self):
+        """
+        Initialize the cache
+        """
         super().__init__()
+        # Initialize an empty ordered dictionary
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
