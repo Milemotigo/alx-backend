@@ -14,12 +14,9 @@ class LRUCache(BaseCaching):
     """
 
     def __init__(self):
+        """Initializes the cache.
+        """
         super().__init__()
-        """
-        It ensures that the initialization code in the parent
-        class is executed before any additional initialization
-        specific to the child class
-        """
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
