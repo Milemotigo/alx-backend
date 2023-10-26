@@ -30,6 +30,7 @@ class MRUCache(BaseCaching):
             print(f"DISCARD: {mru}")
             del self.cache_data[mru]
         self.cache_data[key] = item
+        self.cache_data.move_to_end(key, last=False)
 
     def get(self, key):
         """
