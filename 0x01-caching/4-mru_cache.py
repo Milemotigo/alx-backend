@@ -19,7 +19,10 @@ class MRUCache(BaseCaching):
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """add to the cache by key, value"""
+        """
+        add to the cache by key, value
+        if key is None or item is None return None
+        """
         if key is None or item is None:
             return
         if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
@@ -31,6 +34,7 @@ class MRUCache(BaseCaching):
     def get(self, key):
         """
         fetch data by their key
+        return the value in self.cache_data linked to key
         """
         if key is None:
             return None
