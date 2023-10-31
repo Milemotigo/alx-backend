@@ -30,6 +30,9 @@ def hello_world():
 
 @babel.localeselector
 def get_locale():
+    '''
+    a get_locale function with the babel.localeselector decorator
+    '''
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
