@@ -3,7 +3,7 @@
 """
 
 from flask_babel import Babel
-from flask import Flask
+from flask import Flask, render_template
 
 
 app = Flask(__name__)
@@ -19,6 +19,12 @@ class Config:
 
 
 app.config.from_object(Config)
+
+
+@app.route('/')
+def hello_world():
+    """ a single / route """
+    return render_template('0-index.html')
 
 
 if __name__ == "__main__":
