@@ -1,25 +1,35 @@
 #!/usr/bin/env python3
-'''Task 4: Force locale with URL parameter
-'''
-
-from typing import Dict, Union
+"""
+module: 4-app.py
+"""
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 
 
 class Config:
-    '''Config class'''
-
-    DEBUG = True
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
+    """bable config code"""
+    LANGUAGES = ['en', 'fr']
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.url_map.strict_slashes = False
 babel = Babel(app)
+
+
+@babel.localeselector
+def get_locale():
+    """
+    auto language selector
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    """
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
+
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -29,8 +39,9 @@ users = {
 }
 
 
-def get_user() -> Union[Dict, None]:
-    """Retrieves a user based on a user id.
+def get_user():
+    """
+    checks and return a user based on id
     """
     login_id = request.args.get('login_as')
     if login_id:
@@ -39,37 +50,16 @@ def get_user() -> Union[Dict, None]:
 
 
 @app.before_request
-def before_request() -> None:
-    """Performs some routines before each request's resolution.
-    """
-
+def before_request():
+    """ to be executed before all other functions """
     g.user = get_user()
 
 
-@babel.localeselector
-def get_locale() -> str:
-    """Retrieves the locale for a web page.
-
-    Returns:
-        str: best match
-    """
-    locale = request.args.get('locale')
-    if locale in app.config['LANGUAGES']:
-        return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+@app.route("/")
+def hello():
+    """a basic flask route"""
+    return render_template('5-index.html')
 
 
-@app.route('/')
-def index() -> str:
-    '''default route
-
-    Returns:
-        html: homepage
-    '''
-    return render_template("5-index.html")
-
-babel.init_app(app, locale_selector=get_locale)
-
-
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
